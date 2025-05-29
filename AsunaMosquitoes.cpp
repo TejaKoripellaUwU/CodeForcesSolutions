@@ -31,15 +31,21 @@ int main() {
             cout<<max_num<<endl;
         }
         else{
+            int h = o.top();
+            o.pop();
             for (int y = 0; y<e.size();y++){
-                if (o.size()>0){
-                    max_odd += o.top();
+                h += e[y];
+            }
+            o.push(h);
+            while(o.size()!=1 && o.size()!=2){
+                int w;
+                for (int x; x<3; x++){
+                    w+=o.top();
                     o.pop();
                 }
-                max_odd += e[y];
+                o.push(w);
             }
-                
-            cout<<max_odd<<endl;
+            cout<<o.top()<<endl;
         }
     }
   
