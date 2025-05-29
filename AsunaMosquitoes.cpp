@@ -39,10 +39,11 @@ int main() {
             o.push(h);
             while(o.size()!=1 && o.size()!=2){
                 int w;
-                for (int x; x<3; x++){
+                for (int x=0; x<3; x++){
                     w+=o.top();
                     o.pop();
                 }
+                cout<<o.size()<<endl;
                 o.push(w);
             }
             cout<<o.top()<<endl;
