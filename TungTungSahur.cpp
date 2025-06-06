@@ -1,48 +1,50 @@
 #include <iostream>
 #include <string>
-#include <cmath>
 using namespace std;
 
 int main() {
-    string q;
-    getline(cin,q);
-    int r = stoi(q);
+    int r;
+    cin >> r;
+    cin.ignore();
+
     while (r--) {
-        string s1 = "";
+        string s1, s2;
         getline(cin, s1);
-        string s2 = "";
-        getline(cin,s2);
-        int p = 0;
-        bool f = true;
-        if (s1.size()>s2.size()){
-            cout<<"NO"<<endl;
-        } else{
-            for (int i = 0; i<s1.size(); i++){
-                if (i == 0 && s2[p] != s1[i]){
-                    cout<<"NO"<<endl;
-                    f = false;
-                    break;
-                }
-                if (s2[p] != s1[i]){
-                    if (p+1 < s2.size() && s2[p+1] == s1[i]){
-                        p+=1;
-                    } else{
-                        cout<<"NO"<<endl;
-                        f = false;
-                        break;
-                    }
-                }
-                p+=1;
+        getline(cin, s2);
+
+        int p1 = 0, p2 = 0;
+        bool valid = true;
+
+        while (p1 < s1.size() && p2 < s2.size()) {
+            if (s1[p1] != s2[p2]) {
+                valid = false;
+                break;
             }
-            if (f){
-                if (p<s2.size()){
-                    
-                    cout<<"NO"<<endl;
-                }else{
-                    cout<<"YES"<<endl;
-                }
+
+            char ch = s1[p1];
+
+            int cnt1 = 0;
+            while (p1 < s1.size() && s1[p1] == ch) {
+                cnt1++;
+                p1++;
+            }
+
+            int cnt2 = 0;
+            while (p2 < s2.size() && s2[p2] == ch) {
+                cnt2++;
+                p2++;
+            }
+
+            if (cnt2 < cnt1 || cnt2 > 2 * cnt1) {
+                valid = false;
+                break;
             }
         }
 
+        if (p1 != s1.size() || p2 != s2.size()) valid = false;
+
+        cout << (valid ? "YES" : "NO") << endl;
     }
+
+    return 0;
 }
